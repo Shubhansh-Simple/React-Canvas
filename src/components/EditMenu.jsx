@@ -40,9 +40,7 @@ const EditMenu = ({
   /* Updating existing Font */
   useEffect(() => {
 
-    if ( updateFont ){
-
-      console.log('We got it here - ', updateFont);
+    if ( Object.keys(updateFont).length > 0 ){
 
       { updateFont['fontFamily'] && setFontFamily(updateFont['fontFamily']) }
       { updateFont['fontSize']   && setFontSize(updateFont['fontSize'])     }

@@ -36,8 +36,6 @@ const Body = () => {
   /* APPEND item to the current state */
   const appendTextList = newFont =>{
 
-    console.log('Append method called ', newFont);
-
     /* ID ALREADY EXIST */
     if( newFont.id !== -1 )
       updateTextList(newFont);
@@ -86,21 +84,28 @@ const Body = () => {
      * DELETE FUNCTION
      */
   const deleteTextItem = itemId => {
-    console.log('Deleting Text - ',itemId );
 
+    console.log('Deleting Text - ',itemId );
+  
     // Copied existing STATE
     let copyTextList = [...textList];
 
     /* Delete item of given id */
-
     copyTextList = copyTextList.filter( item=>{
       return item['id'] !== itemId
     })
 
+    /*
+     * BUG - solution is to remove 'id'
+     * Re-arranging the index - LATER OPTIMIZED
+     * DUE TO LESS TIME FOR CODE SUBMISSION
+     */
+    for (let i = 0; i < copyTextList.length; i++ )
+      copyTextList[i]['id'] = i;
+
     // Update original state
     setTextList(copyTextList);
   }
-
 
     /**
      * DRAG FUNCTION
@@ -108,7 +113,6 @@ const Body = () => {
 
   /* On Dragging text, update state with latest position */
   const onDragStop = (event,id) => {
-    console.log('Axis - ', event.clientX, event.clientY);
 
     // Copied existing STATE
     let copyTextList = [...textList];
