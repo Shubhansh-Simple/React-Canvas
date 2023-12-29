@@ -6,9 +6,7 @@
 import { Form } from "react-bootstrap";
 
 
-const FontColor = ( {color} ) => {
-
-  const DEFUALT_COLOR = '#000000';
+const FontColor = ( {color, colorChild} ) => {
 
   /* On color change */
   const onColorPick = e => {
@@ -31,8 +29,8 @@ const FontColor = ( {color} ) => {
       <Form.Control type='color' 
                     className='mb-1'
                     id='fontColorInput' 
-                    onChange={onColorPick}
-                    defaultValue={DEFUALT_COLOR}/>
+                    value={colorChild}
+                    onChange={onColorPick} />
     </>
   )
 }

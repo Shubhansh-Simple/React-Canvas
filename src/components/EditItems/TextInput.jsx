@@ -2,20 +2,14 @@
  * TextInput UI for taking input from user
  */
 
-// React
-import {useState} from 'react';
-
 // React-Bootstrap
 import {Form} from 'react-bootstrap';
 
-const TextInput = ( {fontInput} ) => {
-
-  const [ textInput, setTextInput ] = useState('');
+const TextInput = ( {fontInput, textInputChild} ) => {
 
   const onTextInputChange = e => {
 
     let currentText = e.target.value;
-    setTextInput( currentText );
 
     /* Return updated data to parent */
     fontInput(currentText);
@@ -31,7 +25,7 @@ const TextInput = ( {fontInput} ) => {
         size='md'
         className='mb-3'
         placeholder='Enter your text here'
-        value={textInput}
+        value={textInputChild}
         onChange={onTextInputChange}
         />
     </>

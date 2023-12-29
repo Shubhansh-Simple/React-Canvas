@@ -15,15 +15,14 @@ import { Button,
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 
-const FontSize = ( {size} ) => {
+const FontSize = ( {size, sizeChild} ) => {
 
   /* Minimum and maximum size of font */
   const MIN_FONT_SIZE = 1;
   const MAX_FONT_SIZE = 100;
-  const DEFAULT_SIZE  = 30;
 
   /* STATE FOR FONT SIZE */ 
-  const [fontSize, setFontSize] = useState(DEFAULT_SIZE);
+  const [fontSize, setFontSize] = useState( sizeChild );
 
 
   /* Increase font size by 1 */
@@ -46,7 +45,7 @@ const FontSize = ( {size} ) => {
     let newSize = fontSize-1;
 
     if ( fontSize > MIN_FONT_SIZE ){
-      setFontSize( newSize );
+      // setFontSize( newSize );
 
       /* Return updated data to parent */
       size(newSize);
@@ -60,7 +59,7 @@ const FontSize = ( {size} ) => {
 
       {/* Font Size Widget */}
       <Form.Control
-        value={fontSize+' px'}
+        value={sizeChild+' px'}
         readOnly
       />
       <InputGroup.Text>

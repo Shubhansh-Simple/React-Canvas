@@ -17,10 +17,15 @@ import TextInput  from './EditItems/TextInput';
 
 const EditMenu = ( {font,fontList} ) => {
 
+  /* Default CONSTANT */
+  const FONT_FAMILY = 'Ubuntu';
+  const FONT_COLOR  = '#000000';
+  const FONT_SIZE   = 30;
+
   /* STATE FOR EACH WIDGET */
-  const [ fontFamily, setFontFamily ] = useState('Ubuntu');
-  const [ fontSize, setFontSize ]     = useState(30);
-  const [ fontColor, setFontColor ]   = useState('#000000');
+  const [ fontFamily, setFontFamily ] = useState( FONT_FAMILY );
+  const [ fontSize, setFontSize ]     = useState( FONT_SIZE );
+  const [ fontColor, setFontColor ]   = useState( FONT_COLOR );
   const [ textInput, setTextInput ]   = useState('');
 
   /* For showing text on body screen
@@ -64,6 +69,14 @@ const EditMenu = ( {font,fontList} ) => {
    * Reset the current font on screen 
    */
   const onReset = () => {
+
+    /* Reset everything to initial value */
+    setTextInput('');
+    setFontSize(FONT_SIZE);
+    setFontColor(FONT_COLOR);
+    setFontFamily(FONT_FAMILY);
+
+    /* Reset showing off text */
     font('');
   }
 
@@ -71,8 +84,17 @@ const EditMenu = ( {font,fontList} ) => {
    * and current input too.
    */
   const onClear = () => {
-    fontList({});
+
+    /* Reset everything to initial value */
+    setTextInput('');
+    setFontSize(FONT_SIZE);
+    setFontColor(FONT_COLOR);
+    setFontFamily(FONT_FAMILY);
+
+    /* Reset showing off text */
     font('');
+    /* Clear entire STATE of text */
+    fontList({});
   }
 
   return (
@@ -92,22 +114,30 @@ const EditMenu = ( {font,fontList} ) => {
               {/* Font Family */}
               <tr className='text-center'>
                 <td colSpan={2}>
-                  <FontFamily family={data=>setFontFamily(data)} />
+                  <FontFamily family={data=>setFontFamily(data)} 
+                              familyChild={fontFamily} />
                 </td>
               </tr>
 
               <tr>
                 {/* Font Size */}
-                <td><FontSize size={data=>setFontSize(data)} /></td>
+                <td>
+                  <FontSize size     ={data=>setFontSize(data)} 
+                            sizeChild={fontSize}/>
+                </td>
 
                 {/* Font Color */}
-                <td><FontColor color={data=>setFontColor(data)} /></td>
+                <td>
+                  <FontColor color={data=>setFontColor(data)} 
+                             colorChild={fontColor}/>
+                </td>
               </tr>
 
               {/* Text Input */}
               <tr>
                 <td colSpan={2}>
-                  <TextInput fontInput={data=>setTextInput(data)}/>
+                  <TextInput fontInput     ={data=>setTextInput(data)}
+                             textInputChild={textInput} />
                 </td>
               </tr>
             </tbody>
@@ -116,7 +146,7 @@ const EditMenu = ( {font,fontList} ) => {
             <tfoot>
               <tr>
                 <td>
-                  <Button variant='primary' 
+                  <Button variant='success' 
                           disabled={ textInput.length < 1 }
                           onClick={onSubmit}
                           >

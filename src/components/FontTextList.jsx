@@ -31,6 +31,7 @@ const FontTextList = ( {fontStyleList} ) => {
           &&
         fontStyleList.map( fontStyle=>
           <p key={fontStyle.id}
+             onClick={()=>console.log('My id is ',fontStyle.id)}
             style={{
               position  : 'absolute',
               color     : fontStyle.fontColor, 
