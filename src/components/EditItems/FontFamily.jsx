@@ -2,7 +2,10 @@
  * Font Family Selector UI Component
  */
 
-import {useState} from "react";
+// React
+import {useEffect} from 'react';
+
+// React-bootstrap
 import { Dropdown, DropdownButton } from "react-bootstrap";
 
 
@@ -11,6 +14,12 @@ const FontFamily = ( {familyCallback, family} ) => {
   /* Font Family Options */
   const FontFamilyList = [ 'Ubuntu', 'monospace', 
                            'Monaco', 'Courier New' ];
+
+  /* Store id in text property
+   * can optimize this */
+  useEffect( ()=>{
+    familyCallback(family);
+  },[ family ])
 
   /* On selecting any font family */
   const onFontFamilySelect = id => {

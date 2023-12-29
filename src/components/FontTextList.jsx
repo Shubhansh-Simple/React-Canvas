@@ -1,8 +1,8 @@
 /*
  * Return the TEXT with given CSS properties
+ * We able to drag and drop this text
  */
 
-const FontTextList = ( {fontObjList, callBack} ) => {
   /*
    * ( Sample blueprint of fontObj PROP )
    *
@@ -17,11 +17,17 @@ const FontTextList = ( {fontObjList, callBack} ) => {
    * }
    *
    */
+const FontTextList = ( {fontObjList, dragCallback, onClickCallback} ) => {
 
   /* On clicking any text on Screen
    * sends it's id to parent */
-  const onClickText = id =>
-    callBack(id);
+  const onTextClick = id =>
+    onClickCallback(id);
+
+  /* DRAGGING ENDS */
+  const onDragStop = (event, id) =>{
+    dragCallback(event, id);
+  }
 
   /*
    * Iterate through each font 
@@ -34,17 +40,22 @@ const FontTextList = ( {fontObjList, callBack} ) => {
         fontObjList
           &&
         fontObjList.map( fontObj=>
-          <p key={fontObj.id}
-             onClick={()=>onClickText(fontObj.id)}
-            style={{
-              position  : 'absolute',
-              color     : fontObj.fontColor, 
-              fontFamily: fontObj.fontFamily,
-              fontSize  : `${fontObj.fontSize}px`,
-              transform : `translate( ${fontObj.x}px, ${fontObj.y}px )`,
-            }}>
-            {fontObj.fontText}
-          </p>
+          <div key={fontObj.id}>
+            <p draggable={true}
+               onClick={()=>onTextClick(fontObj.id)}
+               onDragEnd={e=>onDragStop(e,fontObj.id) }
+
+              style={{
+                position  : 'absolute',
+                color     : fontObj.fontColor, 
+                fontFamily: fontObj.fontFamily,
+                fontSize  : `${fontObj.fontSize}px`,
+                transform : `translate( ${fontObj.x}px, ${fontObj.y}px )`,
+              }}>
+
+                {fontObj.fontText}
+            </p>
+          </div>
         )
       }
     </>

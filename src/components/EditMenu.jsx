@@ -15,7 +15,11 @@ import FontColor  from './EditItems/FontColor';
 import FontInput  from './EditItems/FontInput';
 
 
-const EditMenu = ( {fontCallback,fontListCallback} ) => {
+const EditMenu = ({
+  appendListCallback,
+  typedFontCallback,
+  updateListCallback,
+  updateFont})=>{
 
   /* Default CONSTANT */
   const FONT_FAMILY = 'Ubuntu';
@@ -24,9 +28,38 @@ const EditMenu = ( {fontCallback,fontListCallback} ) => {
 
   /* STATE FOR EACH WIDGET */
   const [ fontFamily, setFontFamily ] = useState( FONT_FAMILY );
-  const [ fontSize, setFontSize ]     = useState( FONT_SIZE );
+  const [ fontSize,   setFontSize ]   = useState( FONT_SIZE );
   const [ fontColor, setFontColor ]   = useState( FONT_COLOR );
   const [ fontInput, setFontInput ]   = useState('');
+
+  /* Updating existing Font */
+  useEffect(() => {
+    /* The bug is here, i unable to get the correct id
+     * through which i want to update the data
+     * play with the id, and stay the clean code there.
+     */
+    if ( updateFont && updateFont[updateFont['id']] ){
+
+      console.log('We got it here - ', updateFont);
+      ( updateFont[0]['fontFamily'] && 
+        setFontFamily(updateFont[0]['fontFamily']) );
+
+      ( updateFont[0]['fontSize'] && 
+        setFontSize(updateFont[0]['fontSize']) );
+
+      ( updateFont[0]['fontColor'] &&      
+        setFontColor(updateFont[0]['fontColor']) );
+
+      ( updateFont[0]['fontText'] && 
+        setFontInput(updateFont[0]['fontText']) );
+
+      /* Modify existing text to null */
+      updateFont[0]['fontText'] = '';
+
+      /* Set original fontObject to empty, before updating */
+      appendListCallback( updateFont );
+    }
+  },[updateFont]);
 
 
   /* Return prepared data for setting font STATE */
@@ -34,8 +67,8 @@ const EditMenu = ( {fontCallback,fontListCallback} ) => {
 
     let newFont = {
       'id' : -1,
-      'x': 500,
-      'y': 400,
+      'x': 100,
+      'y': 100,
       'fontFamily': fontFamily,
       'fontSize'  : fontSize,
       'fontColor' : fontColor,
@@ -44,13 +77,30 @@ const EditMenu = ( {fontCallback,fontListCallback} ) => {
     return newFont;
   }
 
-  /* For showing text on body screen
-   * while TYPING
-   */
+  /* For showing text on body screen while TYPING */
   useEffect(() => {
-    fontCallback( getFontObj() );
+    typedFontCallback( getFontObj() );
   }, [fontFamily, fontSize, fontColor, fontInput]);
 
+
+  /* On clicking RESET button,Reset value in edit menu*/
+  const resetEditMenu = () => {
+    setFontInput('');
+    setFontSize(FONT_SIZE);
+    setFontColor(FONT_COLOR);
+    setFontFamily(FONT_FAMILY);
+
+    /* Reset showing off text */
+    typedFontCallback('');
+  }
+
+  /* On clicking CLEAR button,textLIST STATE set to [] */
+  const onClear = () => {
+    resetEditMenu();
+
+    /* Clear entire STATE of text */
+    appendListCallback({});
+  }
 
   /* Submit the Edit Menu data */
   const onSubmit = () => {
@@ -59,52 +109,33 @@ const EditMenu = ( {fontCallback,fontListCallback} ) => {
     setFontInput('');
 
     /* Reset showing off text */
-    fontCallback('');
+    typedFontCallback('');
 
     /* Return updated data to parent */
-    fontListCallback( getFontObj() );
+    let data = getFontObj();
+
+    ( 
+      data['id'] === -1 
+          ?
+      appendListCallback( data )
+          :
+      updateListCallback( data )
+    )
   }
 
-  /* Reset value to default in edit menu */
-  const resetEditMenu = () => {
-    setFontInput('');
-    setFontSize(FONT_SIZE);
-    setFontColor(FONT_COLOR);
-    setFontFamily(FONT_FAMILY);
-  }
-
-  /* On clicking RESET button */
-  const onReset = () => {
-    resetEditMenu();
-
-    /* Reset showing off text */
-    fontCallback('');
-  }
-
-  /* On clicking CLEAR button 
-   * textLIST STATE set to [] 
-   */
-  const onClear = () => {
-    resetEditMenu();
-
-    /* Reset showing off text */
-    fontCallback('');
-
-    /* Clear entire STATE of text */
-    fontListCallback({});
-  }
 
   return (
     <Container>
 
-      {/* At the right side of the main screen */}
+      {/* At the rigitle={familyht side of the main screen */}
       <Card style={{ width    : '400px',  
                      position : 'absolute', 
+                     bottom   : '0',
                      right    : '0' }}>
 
         {/* CARD BODY */}
         <Card.Body>
-          <Table responsive size='sm p-0 m-0'>
+          <Table borderless responsive size='sm p-0 m-0'>
             <thead></thead>
 
             <tbody>
@@ -144,21 +175,21 @@ const EditMenu = ( {fontCallback,fontListCallback} ) => {
               <tr>
                 <td>
                   <Button variant='success' 
-                          disabled={ fontInput.length < 1 }
+                          disabled={!fontInput}
                           onClick={onSubmit}
                           >
                     Add 
                   </Button>
                   {' '}
                   <Button variant='secondary' 
-                          onClick={onReset}
+                          onClick={resetEditMenu}
                           >
                     Reset
                   </Button>
                   {' '}
                   <Button variant='danger' 
                           onClick={onClear} >
-                    Clear 
+                    All Clear
                   </Button>
                 </td>
               </tr>

@@ -2,25 +2,22 @@
  * Base template of our application
  */
 
-// React-Router
-
 // Local
 import Body   from './components/Body';
 import Footer from './components/Footer';
 
 /*
- * Router uses the outlet ( index.js )
- * like which component need to show
- * there
+ *    <Body />
+ *    <Footer />
  */
 const App = () => {
-  // <Header />
+
   return (
     <>
-      {/* Body Component */}
+      {/* Body Of Application */}
       <Body />
 
-      {/* Footer Component */}
+      {/* Footer Of Application */}
       <Footer />
     </>
   );

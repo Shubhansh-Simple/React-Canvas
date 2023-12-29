@@ -12,52 +12,104 @@ import FontTextList from './FontTextList';
 
 const Body = () => {
 
-  // For showing off while TYPING
-  const [text, setText] = useState('');
+  /* For showing off while TYPING */
+  const [ typedText, setTypedText] = useState('');
 
+  /* MAIN STATE for storing sentences */
   const [textList, setTextList] = useState([]);
+
+  /* For updating existing font */
+  const [updateFont, setUpdateFont] = useState({});
+
 
   /* Whenever there is change 
    * in textList STATE */
   useEffect(()=>{
-    console.log(textList);
+    console.log(textList,textList.length);
   },[textList]);
-
-
-  /* Updating the existing text */
-  const updateText = textId => {
-    console.log('Selected text id is - ', textList[textId]);
-  }
 
 
   /* Append data to the current state */
   const appendTextList = newFont =>{
 
-    /* Clear Screen */
-    if (Object.keys(newFont).length === 0){
-      setTextList([]);
-    }
+    console.log('Append method called ', newFont);
 
-    /* Add more text to Screen if text is not empty */
-    else if ( newFont['fontText'].length > 0 ){
+    /* EMPTY OBJECT - Clear Screen */
+    if (Object.keys(newFont).length === 0)  setTextList([]);
+
+    /* ID ALREADY EXIST */
+    else if( newFont.id !== -1 )
+      updateTextList(newFont);
+
+    /* Add more text to Screen if text is not empty 
+     * and ID not already exist*/
+    else if ( newFont['fontText'] && newFont['fontText'].length ){
       newFont['id'] = textList.length;
       setTextList( existList=> [...existList,newFont] );
     }
   }
 
+
+  /* Update items in list, Since ID exist */
+  const updateTextList = updateFont => {
+
+    // Copied existing STATE
+    let copyTextList = [...textList];
+
+    // Update locally stored data
+    copyTextList[updateFont.id] = updateFont;
+
+    // Update original state
+    setTextList(copyTextList);
+  }
+
+
+  /* Updating the existing text */
+  const updateThisText = textId => {
+
+    let fontToUpdate = textList[textId];
+    console.log('fontToUpdate - ', fontToUpdate, typeof(fontToUpdate));
+
+    if ( fontToUpdate ){
+      console.log('Selected text id is - ', fontToUpdate);
+      setUpdateFont(textList )
+    }
+    else
+      throw new Error('Id doesn\'t exist for updating');
+  }
+
+
+  /* On Dragging text, update state with latest position */
+  const onDragStop = (event,id) => {
+    console.log('Axis - ', event.clientX, event.clientY);
+
+    // Copied existing STATE
+    let copyTextList = [...textList];
+
+    copyTextList[id]['x'] = event.clientX;
+    copyTextList[id]['y'] = event.clientY;
+
+    // Update original state
+    setTextList(copyTextList);
+  }
+
+
   return (
     <>
       {/* SHOW OFF TEXT WHILE TYPING  
           coming from EDITMENU */}
-      <FontText fontObj={text} />
+      <FontText fontObj={typedText} />
 
-      {/* Text List */}
+      {/* Text List On Screen */}
       <FontTextList fontObjList={textList} 
-                    callBack={updateText} />
+                    dragCallback={(e,id)=>onDragStop(e,id)}
+                    onClickCallback={updateThisText} />
 
       {/* Font Edit Menu */}
-      <EditMenu fontListCallback={data=>appendTextList(data)} 
-                fontCallback={data=>setText(data)} />
+      <EditMenu appendListCallback={data=>appendTextList(data)} 
+                updateListCallback={data=>updateTextList(data)}
+                typedFontCallback={data=>setTypedText(data)} 
+                updateFont={updateFont} />
     </>
   );
 };

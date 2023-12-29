@@ -22,7 +22,7 @@ const FontColor = ( {colorCallback, color} ) => {
       {/* Color Picker Title */}
       <Form.Label htmlFor='fontColorInput' 
                 className='text-secondary mb-0'>
-        <i>Color</i>
+        <i><b>Color</b></i>
       </Form.Label>
 
       {/* Color Picker Widget */}

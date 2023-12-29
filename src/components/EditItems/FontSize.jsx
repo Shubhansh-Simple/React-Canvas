@@ -22,15 +22,15 @@ const FontSize = ( {sizeCallback, size} ) => {
   const MAX_FONT_SIZE = 100;
 
   /* STATE FOR FONT SIZE */ 
-  const [fontSize, setFontSize] = useState( size);
+  const [fontSize, setFontSize] = useState(size);
 
 
   /* Increase font size by 1 */
   const onSizeIncrease = () => {
 
-    let newSize = fontSize+1;
+    let newSize = fontSize+2;
 
-    if ( fontSize < MAX_FONT_SIZE ){
+    if ( newSize < MAX_FONT_SIZE ){
       setFontSize( newSize );
 
       /* Return updated data to parent */
@@ -42,10 +42,10 @@ const FontSize = ( {sizeCallback, size} ) => {
   /* Decrease font size by 1 */
   const onSizeDecrease = () => {
 
-    let newSize = fontSize-1;
+    let newSize = fontSize-2;
 
-    if ( fontSize > MIN_FONT_SIZE ){
-      // setFontSize( newSize );
+    if ( newSize > MIN_FONT_SIZE ){
+      setFontSize( newSize );
 
       /* Return updated data to parent */
       sizeCallback(newSize);
