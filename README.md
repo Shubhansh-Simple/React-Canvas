@@ -1,4 +1,4 @@
-# Simple Text based project build on React
+# Simple Canvas Text based project build on React
 
 ## Installation Guide
 1.) Install all necessary packages to run the software
