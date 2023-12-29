@@ -29,16 +29,17 @@ const Body = () => {
   },[textList]);
 
 
-  /* Append data to the current state */
+    /**
+     * APPEND FUNCTION
+     */
+
+  /* APPEND item to the current state */
   const appendTextList = newFont =>{
 
     console.log('Append method called ', newFont);
 
-    /* EMPTY OBJECT - Clear Screen */
-    if (Object.keys(newFont).length === 0)  setTextList([]);
-
     /* ID ALREADY EXIST */
-    else if( newFont.id !== -1 )
+    if( newFont.id !== -1 )
       updateTextList(newFont);
 
     /* Add more text to Screen if text is not empty 
@@ -49,8 +50,11 @@ const Body = () => {
     }
   }
 
+    /**
+     * UPDATE FUNCTION
+     */
 
-  /* Update items in list, Since ID exist */
+  /* UPDATE items in list, Since ID exist */
   const updateTextList = updateFont => {
 
     // Copied existing STATE
@@ -64,20 +68,43 @@ const Body = () => {
   }
 
 
+    /**
+     * CHOOSE FUNCTION
+     */
+
   /* Updating the existing text */
-  const updateThisText = textId => {
+  const updateThisText = itemId => {
 
-    let fontToUpdate = textList[textId];
-    console.log('fontToUpdate - ', fontToUpdate, typeof(fontToUpdate));
+    let fontToUpdate = textList[itemId];
 
-    if ( fontToUpdate ){
-      console.log('Selected text id is - ', fontToUpdate);
-      setUpdateFont(textList )
-    }
+    if ( fontToUpdate )
+      setUpdateFont(fontToUpdate)
     else
       throw new Error('Id doesn\'t exist for updating');
   }
+    /**
+     * DELETE FUNCTION
+     */
+  const deleteTextItem = itemId => {
+    console.log('Deleting Text - ',itemId );
 
+    // Copied existing STATE
+    let copyTextList = [...textList];
+
+    /* Delete item of given id */
+
+    copyTextList = copyTextList.filter( item=>{
+      return item['id'] !== itemId
+    })
+
+    // Update original state
+    setTextList(copyTextList);
+  }
+
+
+    /**
+     * DRAG FUNCTION
+     */
 
   /* On Dragging text, update state with latest position */
   const onDragStop = (event,id) => {
@@ -94,9 +121,17 @@ const Body = () => {
   }
 
 
+    /**
+     * ALL CLEAR FUNCTION
+     */
+
+  /* On clicking clear screen */
+  const clearScreen = () => setTextList([]);
+
+
   return (
     <>
-      {/* SHOW OFF TEXT WHILE TYPING  
+      {/* For SHOW OFF TEXT WHILE TYPING  
           coming from EDITMENU */}
       <FontText fontObj={typedText} />
 
@@ -108,6 +143,8 @@ const Body = () => {
       {/* Font Edit Menu */}
       <EditMenu appendListCallback={data=>appendTextList(data)} 
                 updateListCallback={data=>updateTextList(data)}
+                clearListCallback={()=>clearScreen()}
+                deleteItemCallback={(id)=>deleteTextItem(id)}
                 typedFontCallback={data=>setTypedText(data)} 
                 updateFont={updateFont} />
     </>

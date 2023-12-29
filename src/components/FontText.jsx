@@ -10,9 +10,9 @@ const FontText = ( {fontObj} ) => {
    *  'fontFamily' : 'monospace',
    *  'fontSize'   : 20,
    *  'fontColor'  : 'red',
+   *  'fontText'   : 'Sample text'
    *  'x'          : 10,
    *  'y'          : 20
-   *  'fontText'   : 'Sample text'
    * }
    */
 

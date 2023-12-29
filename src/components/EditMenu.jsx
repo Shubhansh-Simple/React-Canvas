@@ -17,47 +17,46 @@ import FontInput  from './EditItems/FontInput';
 
 const EditMenu = ({
   appendListCallback,
-  typedFontCallback,
   updateListCallback,
-  updateFont})=>{
+  clearListCallback,
+  deleteItemCallback,
+  typedFontCallback,
+  updateFont })=>{
 
   /* Default CONSTANT */
   const FONT_FAMILY = 'Ubuntu';
   const FONT_COLOR  = '#000000';
   const FONT_SIZE   = 30;
+  const FONT_X      = 100;
+  const FONT_Y      = 100;
 
   /* STATE FOR EACH WIDGET */
   const [ fontFamily, setFontFamily ] = useState( FONT_FAMILY );
   const [ fontSize,   setFontSize ]   = useState( FONT_SIZE );
   const [ fontColor, setFontColor ]   = useState( FONT_COLOR );
   const [ fontInput, setFontInput ]   = useState('');
+  const [fontAxis, setFontAxis]       = useState([ FONT_X,FONT_Y ]);
 
   /* Updating existing Font */
   useEffect(() => {
-    /* The bug is here, i unable to get the correct id
-     * through which i want to update the data
-     * play with the id, and stay the clean code there.
-     */
-    if ( updateFont && updateFont[updateFont['id']] ){
+
+    if ( updateFont ){
 
       console.log('We got it here - ', updateFont);
-      ( updateFont[0]['fontFamily'] && 
-        setFontFamily(updateFont[0]['fontFamily']) );
 
-      ( updateFont[0]['fontSize'] && 
-        setFontSize(updateFont[0]['fontSize']) );
+      { updateFont['fontFamily'] && setFontFamily(updateFont['fontFamily']) }
+      { updateFont['fontSize']   && setFontSize(updateFont['fontSize'])     }
+      { updateFont['fontColor']  && setFontColor(updateFont['fontColor'])   }
+      { updateFont['fontText']   && setFontInput(updateFont['fontText'])    }
 
-      ( updateFont[0]['fontColor'] &&      
-        setFontColor(updateFont[0]['fontColor']) );
+      let x = updateFont['x'];
+      let y = updateFont['y'];
 
-      ( updateFont[0]['fontText'] && 
-        setFontInput(updateFont[0]['fontText']) );
+      if (x && y)
+        setFontAxis([x, y]);
 
-      /* Modify existing text to null */
-      updateFont[0]['fontText'] = '';
-
-      /* Set original fontObject to empty, before updating */
-      appendListCallback( updateFont );
+      /* Delete the original text, after get it's data */
+      deleteItemCallback(updateFont['id']);
     }
   },[updateFont]);
 
@@ -67,8 +66,8 @@ const EditMenu = ({
 
     let newFont = {
       'id' : -1,
-      'x': 100,
-      'y': 100,
+      'x': fontAxis[0],
+      'y': fontAxis[1],
       'fontFamily': fontFamily,
       'fontSize'  : fontSize,
       'fontColor' : fontColor,
@@ -98,8 +97,8 @@ const EditMenu = ({
   const onClear = () => {
     resetEditMenu();
 
-    /* Clear entire STATE of text */
-    appendListCallback({});
+    /* Clear entire TEXTLIST STATE */
+    clearListCallback();
   }
 
   /* Submit the Edit Menu data */
