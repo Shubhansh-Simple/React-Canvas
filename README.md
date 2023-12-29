@@ -16,14 +16,14 @@
 
 
 ## Installation Guide
-0.) Since, index starts with zero;) <b>Clone the repo </b>
+0.) Since, index starts with zero;) <b>Clone the repo </b><br>
 1.) Install all necessary packages in order to run the software <br>
 Go to project folder and run <b>npm install</b>
-<i>( it automatically pick up module from package.json file ) </i> <br>
+<i>( it automatically pick up modules from package.json file for installation ) </i> <br>
 
 2.) <i>Navigate to frontend folder</i> & <b>run npm start</b> <br>
 
 3.) Open your browser then type http://localhost:3000/ <br>
-For run the application <br>
+To run the application <br>
 
 <b>.)</b><i>Tools and skills</i> : <b>React, Html, Css, Bootstrap, Javascript</b>
