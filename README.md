@@ -1,6 +1,4 @@
-# Simple Canvas Text based project build on React
-
-# Shop Inventory Management System
+# Simple Canvas Text based React applcation
 
 ## My Portfolio
 <a alt="Shop Inventory Website" href="https://shub.pythonanywhere.com/profile">
@@ -10,7 +8,7 @@
 # Project View
 <p align="center">
   <a alt="Canvas React Application" href="https://shub.pythonanywhere.com/profile">
-    <img alt="Logo" src="https://github.com/Shubhansh-Simple/React-Canvas/blob/main/Screenshots/project.gif" height="500" /> 
+    <img alt="Logo" src="https://raw.githubusercontent.com/Shubhansh-Simple/React-Canvas/main/Screenshots/Project-Demo.gif" height="500" /> 
   </a>
 </p>
 
