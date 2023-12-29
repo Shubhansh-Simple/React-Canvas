@@ -6,7 +6,7 @@ import {useState} from "react";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 
 
-const FontFamily = ( {family, familyChild } ) => {
+const FontFamily = ( {familyCallback, family} ) => {
 
   /* Font Family Options */
   const FontFamilyList = [ 'Ubuntu', 'monospace', 
@@ -16,11 +16,11 @@ const FontFamily = ( {family, familyChild } ) => {
   const onFontFamilySelect = id => {
 
     /* Return updated data to parent */
-    family(FontFamilyList[id]);
+    familyCallback(FontFamilyList[id]);
   }
 
   return (
-      <DropdownButton title={familyChild} 
+      <DropdownButton title={family} 
                       id='fontFamilyInput'
                       variant='secondary'
                       onSelect={onFontFamilySelect} >

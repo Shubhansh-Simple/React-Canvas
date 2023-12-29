@@ -12,10 +12,10 @@ import {Button, Card, Container, Table} from 'react-bootstrap';
 import FontFamily from './EditItems/FontFamily';
 import FontSize   from './EditItems/FontSize';  
 import FontColor  from './EditItems/FontColor';
-import TextInput  from './EditItems/TextInput';
+import FontInput  from './EditItems/FontInput';
 
 
-const EditMenu = ( {font,fontList} ) => {
+const EditMenu = ( {fontCallback,fontListCallback} ) => {
 
   /* Default CONSTANT */
   const FONT_FAMILY = 'Ubuntu';
@@ -26,75 +26,72 @@ const EditMenu = ( {font,fontList} ) => {
   const [ fontFamily, setFontFamily ] = useState( FONT_FAMILY );
   const [ fontSize, setFontSize ]     = useState( FONT_SIZE );
   const [ fontColor, setFontColor ]   = useState( FONT_COLOR );
-  const [ textInput, setTextInput ]   = useState('');
+  const [ fontInput, setFontInput ]   = useState('');
+
+
+  /* Return prepared data for setting font STATE */
+  const getFontObj = ()=>{
+
+    let newFont = {
+      'id' : -1,
+      'x': 500,
+      'y': 400,
+      'fontFamily': fontFamily,
+      'fontSize'  : fontSize,
+      'fontColor' : fontColor,
+      'fontText'  : fontInput,
+      } 
+    return newFont;
+  }
 
   /* For showing text on body screen
    * while TYPING
    */
   useEffect(() => {
-    let newFont = {
-      'fontFamily': fontFamily,
-      'fontSize': fontSize,
-      'fontColor': fontColor,
-      'fontText': textInput,
-      'x': 500,
-      'y': 400,
-    }
-    font(newFont);
-  }, [fontFamily, fontSize, fontColor, textInput]);
+    fontCallback( getFontObj() );
+  }, [fontFamily, fontSize, fontColor, fontInput]);
 
 
   /* Submit the Edit Menu data */
   const onSubmit = () => {
-    let newFont = {
-      'fontFamily' : fontFamily,
-      'fontSize'   : fontSize,
-      'fontColor'  : fontColor,
-      'fontText'   : textInput,
-      'x'          : 500,
-      'y'          : 400,
-    }
 
     /* Text will null after submit */
-    setTextInput('');
+    setFontInput('');
 
     /* Reset showing off text */
-    font('');
+    fontCallback('');
 
     /* Return updated data to parent */
-    fontList(newFont);
+    fontListCallback( getFontObj() );
   }
 
-  /*
-   * Reset the current font on screen 
-   */
-  const onReset = () => {
-
-    /* Reset everything to initial value */
-    setTextInput('');
+  /* Reset value to default in edit menu */
+  const resetEditMenu = () => {
+    setFontInput('');
     setFontSize(FONT_SIZE);
     setFontColor(FONT_COLOR);
     setFontFamily(FONT_FAMILY);
-
-    /* Reset showing off text */
-    font('');
   }
 
-  /* Just reset the textLIST STATE 
-   * and current input too.
+  /* On clicking RESET button */
+  const onReset = () => {
+    resetEditMenu();
+
+    /* Reset showing off text */
+    fontCallback('');
+  }
+
+  /* On clicking CLEAR button 
+   * textLIST STATE set to [] 
    */
   const onClear = () => {
-
-    /* Reset everything to initial value */
-    setTextInput('');
-    setFontSize(FONT_SIZE);
-    setFontColor(FONT_COLOR);
-    setFontFamily(FONT_FAMILY);
+    resetEditMenu();
 
     /* Reset showing off text */
-    font('');
+    fontCallback('');
+
     /* Clear entire STATE of text */
-    fontList({});
+    fontListCallback({});
   }
 
   return (
@@ -111,33 +108,33 @@ const EditMenu = ( {font,fontList} ) => {
             <thead></thead>
 
             <tbody>
-              {/* Font Family */}
+              {/* Font Family (1/4) */}
               <tr className='text-center'>
                 <td colSpan={2}>
-                  <FontFamily family={data=>setFontFamily(data)} 
-                              familyChild={fontFamily} />
+                  <FontFamily familyCallback={data=>setFontFamily(data)} 
+                              family={fontFamily} />
                 </td>
               </tr>
 
               <tr>
-                {/* Font Size */}
+                {/* Font Size (2/4)*/}
                 <td>
-                  <FontSize size     ={data=>setFontSize(data)} 
-                            sizeChild={fontSize}/>
+                  <FontSize sizeCallback={data=>setFontSize(data)} 
+                            size={fontSize}/>
                 </td>
 
-                {/* Font Color */}
+                {/* Font Color (3/4)*/}
                 <td>
-                  <FontColor color={data=>setFontColor(data)} 
-                             colorChild={fontColor}/>
+                  <FontColor colorCallback={data=>setFontColor(data)} 
+                             color={fontColor}/>
                 </td>
               </tr>
 
-              {/* Text Input */}
+              {/* Text Input (4/4)*/}
               <tr>
                 <td colSpan={2}>
-                  <TextInput fontInput     ={data=>setTextInput(data)}
-                             textInputChild={textInput} />
+                  <FontInput inputCallback={data=>setFontInput(data)}
+                             fontInput={fontInput} />
                 </td>
               </tr>
             </tbody>
@@ -147,7 +144,7 @@ const EditMenu = ( {font,fontList} ) => {
               <tr>
                 <td>
                   <Button variant='success' 
-                          disabled={ textInput.length < 1 }
+                          disabled={ fontInput.length < 1 }
                           onClick={onSubmit}
                           >
                     Add 

@@ -6,7 +6,7 @@
 import { Form } from "react-bootstrap";
 
 
-const FontColor = ( {color, colorChild} ) => {
+const FontColor = ( {colorCallback, color} ) => {
 
   /* On color change */
   const onColorPick = e => {
@@ -14,7 +14,7 @@ const FontColor = ( {color, colorChild} ) => {
     let pickColor = e.target.value;
 
     /* Return updated data to parent */
-    color( pickColor )
+    colorCallback( pickColor )
   } 
 
   return (
@@ -29,7 +29,7 @@ const FontColor = ( {color, colorChild} ) => {
       <Form.Control type='color' 
                     className='mb-1'
                     id='fontColorInput' 
-                    value={colorChild}
+                    value={color}
                     onChange={onColorPick} />
     </>
   )

@@ -2,11 +2,11 @@
  * Return the TEXT with given CSS properties
  */
 
-const FontTextList = ( {fontStyleList} ) => {
+const FontTextList = ( {fontObjList, callBack} ) => {
   /*
-   * ( Sample blueprint of fontStyle PROP )
+   * ( Sample blueprint of fontObj PROP )
    *
-   * fontStyle = {
+   * fontObj = {
    *  'id'         : 1,
    *  'fontFamily' : 'monospace',
    *  'fontSize'   : 20,
@@ -17,29 +17,33 @@ const FontTextList = ( {fontStyleList} ) => {
    * }
    *
    */
-  // Debug
-  // console.log('List - ', fontStyleList);
+
+  /* On clicking any text on Screen
+   * sends it's id to parent */
+  const onClickText = id =>
+    callBack(id);
 
   /*
-   * Iterate through each font and show them with CSS
-   * if list exist
+   * Iterate through each font 
+   * with their CSS properties 
+   * & show them with CSS,if list exist
    */
   return (
     <>
       {
-        fontStyleList
+        fontObjList
           &&
-        fontStyleList.map( fontStyle=>
-          <p key={fontStyle.id}
-             onClick={()=>console.log('My id is ',fontStyle.id)}
+        fontObjList.map( fontObj=>
+          <p key={fontObj.id}
+             onClick={()=>onClickText(fontObj.id)}
             style={{
               position  : 'absolute',
-              color     : fontStyle.fontColor, 
-              fontFamily: fontStyle.fontFamily,
-              fontSize  : `${fontStyle.fontSize}px`,
-              transform : `translate( ${fontStyle.x}px, ${fontStyle.y}px )`,
+              color     : fontObj.fontColor, 
+              fontFamily: fontObj.fontFamily,
+              fontSize  : `${fontObj.fontSize}px`,
+              transform : `translate( ${fontObj.x}px, ${fontObj.y}px )`,
             }}>
-            {fontStyle.fontText}
+            {fontObj.fontText}
           </p>
         )
       }

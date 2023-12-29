@@ -2,11 +2,10 @@
  * Return the TEXT with given CSS properties
  */
 
-const FontText = ( {fontStyle} ) => {
-  /*
-   * ( Sample blueprint of fontStyle PROP )
+const FontText = ( {fontObj} ) => {
+  /* ( Sample blueprint of fontObj PROP )
    *
-   * fontStyle = {
+   * fontObj = {
    *  'id'         : 1,
    *  'fontFamily' : 'monospace',
    *  'fontSize'   : 20,
@@ -15,25 +14,22 @@ const FontText = ( {fontStyle} ) => {
    *  'y'          : 20
    *  'fontText'   : 'Sample text'
    * }
-   *
    */
-  // Debug
-  // console.log('List - ', fontStyleList);
 
   /*
-   * Iterate through each font and show them with CSS
+   * Show font with given CSS properties
    * if list exist
    */
   return (
-      <p key={fontStyle.id}
+      <p key={fontObj.id}
         style={{
           position  : 'absolute',
-          color     : fontStyle.fontColor, 
-          fontFamily: fontStyle.fontFamily,
-          fontSize  : `${fontStyle.fontSize}px`,
-          transform : `translate( ${fontStyle.x}px, ${fontStyle.y}px )`,
+          color     : fontObj.fontColor, 
+          fontFamily: fontObj.fontFamily,
+          fontSize  : `${fontObj.fontSize}px`,
+          transform : `translate( ${fontObj.x}px, ${fontObj.y}px )`,
         }}>
-        {fontStyle.fontText}
+        {fontObj.fontText}
       </p>
   );
 }

@@ -23,6 +23,13 @@ const Body = () => {
     console.log(textList);
   },[textList]);
 
+
+  /* Updating the existing text */
+  const updateText = textId => {
+    console.log('Selected text id is - ', textList[textId]);
+  }
+
+
   /* Append data to the current state */
   const appendTextList = newFont =>{
 
@@ -42,15 +49,15 @@ const Body = () => {
     <>
       {/* SHOW OFF TEXT WHILE TYPING  
           coming from EDITMENU */}
-      <FontText fontStyle={text} />
+      <FontText fontObj={text} />
 
       {/* Text List */}
-      <FontTextList fontStyleList={textList} />
+      <FontTextList fontObjList={textList} 
+                    callBack={updateText} />
 
       {/* Font Edit Menu */}
-      <EditMenu fontList={data=>appendTextList(data)} 
-                font={data=>setText(data)}
-      />
+      <EditMenu fontListCallback={data=>appendTextList(data)} 
+                fontCallback={data=>setText(data)} />
     </>
   );
 };
