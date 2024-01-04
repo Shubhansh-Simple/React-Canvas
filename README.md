@@ -1,29 +1,31 @@
 # Simple Canvas Text based React applcation
-
-## My Portfolio
-<a alt="Portfolio" href="https://shub.pythonanywhere.com/profile">
-  <b>Go to my portfolio</b>
-</a>
-
-# Project View
 <p align="center">
   <a alt="Canvas React Application" href="https://shub.pythonanywhere.com/profile">
-    <img alt="Logo" src="https://raw.githubusercontent.com/Shubhansh-Simple/React-Canvas/main/Screenshots/Project-Demo.gif" height="500" /> 
+    <img alt="Logo" src="https://raw.githubusercontent.com/Shubhansh-Simple/React-Canvas/main/Screenshots/Project-Demo.gif" height="300" /> 
   </a>
 </p>
 
-<br>
+### About
+"Simple Canvas Text-based React Application" is a basic web application built using the React JavaScript library and incorporating HTML5 Canvas for rendering graphical elements. The primary focus of this project is to demonstrate a straightforward implementation of a React application that utilizes Canvas to display text.
 
+# Getting Started
 
-## Installation Guide
-0.) Since, index starts with zero;) <b>Clone the repo </b><br>
-1.) Install all necessary packages in order to run the software <br>
-Go to project folder and run <b>npm install</b>
-<i>( it automatically pick up modules from package.json file for installation ) </i> <br>
+### Installation Guide
+* Clone this repository [here](https://github.com/Shubhansh-Simple/React-Canvas.git).
+* The develop branch is the most stable branch at any given time, ensure you're working from it.
+* Run npm install to install all dependencies
 
-2.) <i>Navigate to frontend folder</i> & <b>run npm start</b> <br>
+### Usage
+* Navigate to the root folder & run npm start to start the application.
+* It will open browser if it isn't then open browser & go this url http://localhost:3000/ To run the application
 
-3.) Open your browser then type http://localhost:3000/ <br>
-To run the application <br>
+## Built With
+* [NodeJS](https://nodejs.org/) This is a cross-platform runtime environment built on Chrome's V8 JavaScript engine used in running JavaScript codes on the server. It allows for installation and managing of dependencies and communication with databases.
+* [React](https://react.dev/) React is a free and open-source front-end JavaScript library for building user interfaces based on components.
 
-<b>.)</b><i>Tools and skills</i> : <b>React, Html, Css, Bootstrap, Javascript</b>
+### Authors
+* [Shubhansh-simple](https://github.com/Shubhansh-Simple)
+* [My Portfolio](https://shub.pythonanywhere.com/profile/)
+  
+### License
+This project is available for use under the MIT License.
