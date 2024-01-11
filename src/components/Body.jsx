@@ -25,6 +25,20 @@ const Body = () => {
   /* Whenever there is change 
    * in textList STATE */
   useEffect(()=>{
+
+    /* If there is no text on screen */
+    if ( textList.length === 0 ){
+      const welcomeText = {
+         'id'         : -1,
+         'fontFamily' : 'monospace',
+         'fontSize'   : 50,
+         'fontColor'  : 'red',
+         'fontText'   : 'Welcome To TextCraft',
+         'x'          : 430,
+         'y'          : 250
+      }
+      setTypedText(welcomeText);
+    }
     console.log(textList,textList.length);
   },[textList]);
 

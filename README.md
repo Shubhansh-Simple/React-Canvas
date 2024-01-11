@@ -1,4 +1,5 @@
-# Simple Canvas Text based React applcation
+# TextCraft: React Application for Interactive Text Manipulation"
+
 <p align="center">
   <a alt="Canvas React Application" href="https://shub.pythonanywhere.com/profile">
     <img alt="Logo" src="https://raw.githubusercontent.com/Shubhansh-Simple/React-Canvas/main/Screenshots/Project-Demo.gif" height="300" /> 
