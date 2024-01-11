@@ -1,13 +1,13 @@
 # TextCraft: React Application for Interactive Text Manipulation"
 
-## Add Text
+## Adding Text to the screen
 <p align="center">
   <a alt="Canvas React Application" href="https://shub.pythonanywhere.com/profile">
     <img alt="Add Text" src="https://raw.githubusercontent.com/Shubhansh-Simple/React-Canvas/main/Screenshots/Add-text.gif" height="300" /> 
   </a>
 </p>
 
-## Update Text
+## Updating existing Text
 <p align="center">
   <a alt="Canvas React Application" href="https://shub.pythonanywhere.com/profile">
     <img alt="Update Text" src="https://raw.githubusercontent.com/Shubhansh-Simple/React-Canvas/main/Screenshots/Update-text.gif" height="300" /> 
