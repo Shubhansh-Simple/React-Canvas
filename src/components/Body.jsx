@@ -28,6 +28,8 @@ const Body = () => {
 
     /* If there is no text on screen */
     if ( textList.length === 0 ){
+
+      /* BUG- Should located at the center of the screen */
       const welcomeText = {
          'id'         : -1,
          'fontFamily' : 'monospace',

@@ -5,6 +5,9 @@ node_modules
 /.pnp
 .pnp.js
 
+# Avoid vim swp files
+*.swp
+
 # testing
 /coverage
 
