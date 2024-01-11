@@ -2,7 +2,13 @@
 
 <p align="center">
   <a alt="Canvas React Application" href="https://shub.pythonanywhere.com/profile">
-    <img alt="Logo" src="https://raw.githubusercontent.com/Shubhansh-Simple/React-Canvas/main/Screenshots/Project-Demo.gif" height="300" /> 
+    <img alt="Add Text" src="https://raw.githubusercontent.com/Shubhansh-Simple/React-Canvas/main/Screenshots/Add-text.gif" height="300" /> 
+  </a>
+</p>
+
+<p align="center">
+  <a alt="Canvas React Application" href="https://shub.pythonanywhere.com/profile">
+    <img alt="Update Text" src="https://raw.githubusercontent.com/Shubhansh-Simple/React-Canvas/main/Screenshots/Update-text.gif" height="300" /> 
   </a>
 </p>
 
