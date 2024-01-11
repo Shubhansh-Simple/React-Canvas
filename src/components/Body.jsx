@@ -36,8 +36,8 @@ const Body = () => {
          'fontSize'   : 50,
          'fontColor'  : 'red',
          'fontText'   : 'Welcome To TextCraft',
-         'x'          : 430,
-         'y'          : 250
+         'x'          : 330,
+         'y'          : 220
       }
       setTypedText(welcomeText);
     }
